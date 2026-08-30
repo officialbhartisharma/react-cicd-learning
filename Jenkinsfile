@@ -39,7 +39,8 @@ pipeline {
                         variable: 'NETLIFY_AUTH_TOKEN'
                     )
                 ]) {
-                    sh 'netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID'
+                    // sh 'netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID'
+                    sh 'npx --yes netlify-cli deploy --prod --dir=dist --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN'
                 }
             }
         }
