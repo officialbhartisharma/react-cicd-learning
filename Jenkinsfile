@@ -32,18 +32,17 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                withCredentials([
-                    string(
-                        credentialsId: 'netlify-token',
-                        variable: 'NETLIFY_AUTH_TOKEN'
-                    )
-                ]) {
-                    // sh 'netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID'
-                    sh 'npx --yes netlify-cli deploy --prod --dir=dist --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN'
-                }
-            }
+    steps {
+        withCredentials([
+            string(
+                credentialsId: 'netlify-token',
+                variable: 'NETLIFY_AUTH_TOKEN'
+            )
+        ]) {
+            sh 'npx --yes netlify-cli deploy --prod --dir=dist --site=$NETLIFY_SITE_ID'
         }
+    }
+}
 
     }
 }
