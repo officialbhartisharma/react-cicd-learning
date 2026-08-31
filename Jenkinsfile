@@ -33,21 +33,19 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                withCredentials([
-                    string(
-                        credentialsId: 'netlify-token',
-                        variable: 'NETLIFY_AUTH_TOKEN'
-                    )
-                ]) {
-                    sh '''
-                        npx --yes netlify-cli deploy \
-                          --prod \
-                          --dir=dist \
-                          --site=$NETLIFY_SITE_ID
-                    '''
-                }
-            }
+    steps {
+        withCredentials([
+            string(
+                credentialsId: 'netlify-token',
+                variable: 'NETLIFY_AUTH_TOKEN'
+            )
+        ]) {
+            sh '''
+                echo "Testing Netlify authentication..."
+                npx --yes netlify-cli status
+            '''
         }
+    }
+}
     }
 }
